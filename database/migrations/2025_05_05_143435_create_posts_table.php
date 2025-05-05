@@ -14,7 +14,6 @@ class CreatePostsTable extends Migration
             $table->string('color');
             $table->text('content');
             $table->string('slug')->unique();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('thumbnail')->nullable();
             $table->boolean('published')->default(false);
             $table->json('tags')->nullable();

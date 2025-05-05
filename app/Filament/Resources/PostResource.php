@@ -14,7 +14,6 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Support\Markdown;
 use Filament\Tables;
 use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\ColorColumn;
@@ -24,6 +23,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Illuminate\Support\Facades\Log; // Importer le Log pour le debug
 
 class PostResource extends Resource
 {
@@ -34,6 +34,12 @@ class PostResource extends Resource
 
     public static function form(Form $form): Form
     {
+        // Utilisation de Log pour déboguer
+        Log::info('PostResource form called', [
+            'auth_check' => auth()->check(),
+            'user_id' => auth()->id(),
+        ]);
+
         return $form
             ->schema([
                 Tabs::make('Create new Post')->tabs([
@@ -61,26 +67,27 @@ class PostResource extends Resource
                             ->label('Color')
                             ->required()
                             ->default('#000000'),
+                    ]),
+
                     Tab::make('Content')
                         ->icon('heroicon-o-document-text')
                         ->schema([
                             MarkdownEditor::make('content')
                                 ->label('Content')
                                 ->required()
-                                ->columnSpanFull()
-                        ]),
-                    Tab::make('Meta')
-                        ->icon('heroicon-o-archive-box-arrow-down')
-                        ->schema([
-                            SpatieMediaLibraryFileUpload::make('thumbnail')
-                                ->label('Thumbnail')
-                                ->multiple()
-                                ->reorderable()
-                                ->collection('thumbnails'),
+                                ->columnSpanFull(),
                             Checkbox::make('published')
                                 ->label('Published')
-                                ->default(false)
-                        ])
+    
+                    ]),
+                    Tab::make('Meta')
+                    ->icon('heroicon-o-archive-box-arrow-down')
+                    ->schema([
+                        SpatieMediaLibraryFileUpload::make('thumbnail')
+                            ->label('Thumbnail')
+                            ->multiple()
+                            ->reorderable()
+                            ->collection('thumbnails'),
                     ])
                 ])->columnSpanFull()
                 ->persistTabInQueryString(),
@@ -92,10 +99,10 @@ class PostResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')
-                    ->label('ID')
+                    ->label(label: 'ID')
                     ->sortable()
                     ->searchable()
-                    ->toggleable(),
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('title')
                     ->label('Title')
                     ->sortable()
@@ -124,7 +131,7 @@ class PostResource extends Resource
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
+                Tables\Actions\BulkActionGroup::make([ 
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
