@@ -13,7 +13,7 @@
                         <img src="{{ $post->getFirstMediaUrl('thumbnail', 'preview') }}" alt="{{ $post->title }}" class="object-cover w-full h-full">
                     </div>
                 @endif
-                <p class="text-gray-600 dark:text-gray-300 mb-4">{{ Str::limit($post->synopsis, 100) }}</p>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">{{ Str::limit($post->synopsis, 200) }}</p>
                 <div class="mt-auto flex items-center justify-between">
                     <span class="text-sm text-gray-500 dark:text-gray-400">
                         {{ $post->created_at->format('d/m/Y H:i') }}
@@ -21,6 +21,9 @@
                     <a href="{{ route('posts.show', $post->slug) }}" class="text-blue-600 hover:text-blue-800 dark:hover:text-blue-400 text-sm">
                         Lire plus
                     </a>
+                </div>
+                <div class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    {{ $post->comments_count }} commentaire{{ $post->comments_count !== 1 ? 's' : '' }}
                 </div>
             </div>
         @endforeach

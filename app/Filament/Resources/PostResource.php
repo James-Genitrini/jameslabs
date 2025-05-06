@@ -31,6 +31,7 @@ class PostResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Blog';
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
@@ -68,7 +69,6 @@ class PostResource extends Resource
                             ->required()
                             ->default('#000000'),
                     ]),
-
                     Tab::make('Content')
                         ->icon('heroicon-o-document-text')
                         ->schema([
@@ -79,10 +79,10 @@ class PostResource extends Resource
                             MarkdownEditor::make('content')
                                 ->label('Content')
                                 ->required()
+                                ->maxLength(300)
                                 ->columnSpanFull(),
                             Checkbox::make('published')
                                 ->label('Published')
-    
                     ]),
                     Tab::make('Meta')
                     ->icon('heroicon-o-archive-box-arrow-down')

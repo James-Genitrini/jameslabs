@@ -40,4 +40,10 @@ class Post extends Model implements HasMedia
             ->nonQueued();
     }
 
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+
 }
