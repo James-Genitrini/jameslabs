@@ -19,6 +19,7 @@ class Post extends Model implements HasMedia
         'user_id',
         'thumbnail',
         'published',
+        'synopsis',
         'tags',
     ];
 

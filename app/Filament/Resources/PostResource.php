@@ -72,6 +72,10 @@ class PostResource extends Resource
                     Tab::make('Content')
                         ->icon('heroicon-o-document-text')
                         ->schema([
+                            MarkdownEditor::make('synopsis')
+                                ->label('Synopsis')
+                                ->required()
+                                ->columnSpanFull(),
                             MarkdownEditor::make('content')
                                 ->label('Content')
                                 ->required()
@@ -85,9 +89,9 @@ class PostResource extends Resource
                     ->schema([
                         SpatieMediaLibraryFileUpload::make('thumbnail')
                             ->label('Thumbnail')
-                            ->multiple()
+                            // ->multiple()
                             ->reorderable()
-                            ->collection('thumbnails'),
+                            ->collection('thumbnail'),
                     ])
                 ])->columnSpanFull()
                 ->persistTabInQueryString(),
@@ -129,9 +133,13 @@ class PostResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('View')
+                    ->url(fn (Post $record) => route('posts.show', $record))
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-eye'),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([ 
+                Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);

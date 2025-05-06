@@ -13,6 +13,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('color');
             $table->text('content');
+            $table->text('synopsis')->nullable();
             $table->string('slug')->unique();
             $table->string('thumbnail')->nullable();
             $table->boolean('published')->default(false);
