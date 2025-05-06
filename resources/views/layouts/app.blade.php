@@ -16,14 +16,14 @@
             <div>
                 @auth
                     @if(auth()->user()->is_admin)
-                        <a href="/admin" class="text-blue-600 mx-4 dark:text-blue-400">Dashboard</a>
+                        <a href="/auth" class="text-blue-600 mx-4 dark:text-blue-400">Dashboard</a>
                     @endif
                     <form action="{{ route('logout') }}" method="POST" class="inline">
                         @csrf
                         <button type="submit" class="text-red-600 dark:text-red-400">Se déconnecter</button>
                     </form>
                 @else
-                    <a href="/admin" class="text-blue-600 mx-4 dark:text-blue-400">Se connecter</a>
+                    <a href="/auth/login" class="text-blue-600 mx-4 dark:text-blue-400">Se connecter</a>
                 @endauth
             </div>
         </div>
