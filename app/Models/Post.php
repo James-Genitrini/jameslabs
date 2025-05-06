@@ -45,5 +45,14 @@ class Post extends Model implements HasMedia
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likeable');
+    }
+
+    public function isLikedBy(User $user): bool
+    {
+        return $this->likes()->where('user_id', $user->id)->exists();
+    }
 
 }

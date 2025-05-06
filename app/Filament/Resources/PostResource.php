@@ -78,6 +78,7 @@ class PostResource extends Resource
                                 ->columnSpanFull(),
                             MarkdownEditor::make('content')
                                 ->label('Content')
+                                ->helperText('<img src="/chemin/vers/image.jpg" alt="Description" style="width: 300px;" />')
                                 ->required()
                                 ->maxLength(300)
                                 ->columnSpanFull(),
@@ -125,6 +126,12 @@ class PostResource extends Resource
                     ->label('Published')
                     ->sortable()
                     ->toggleable(),
+                TextColumn::make('comments_count')
+                    ->label('Number of Comments')
+                    ->sortable(),
+                TextColumn::make('likes_count')
+                    ->label('Number of Likes')
+                    ->sortable()
                 
             ])
             ->filters([
@@ -160,4 +167,12 @@ class PostResource extends Resource
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->withCount(['comments', 'likes']);
+    }
+
+
+
 }

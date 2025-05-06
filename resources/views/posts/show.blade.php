@@ -37,4 +37,63 @@
             </div>
         </footer>
     </article>
+    <!-- Zone d'interaction : Like + Commentaires -->
+    <section class="max-w-4xl mx-auto mt-8 space-y-8">
+
+        <!-- ❤️ Like -->
+        <div class="flex items-center justify-between">
+            @auth
+                @if ($post->isLikedBy(auth()->user()))
+                    <form action="{{ route('posts.unlike', $post) }}" method="POST" class="flex items-center gap-2">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="flex items-center text-red-500 hover:text-red-700">
+                            ❤️ <span class="ml-1">Retirer le like ({{ $post->likes()->count() }})</span>
+                        </button>
+                    </form>
+                @else
+                    <form action="{{ route('posts.like', $post) }}" method="POST" class="flex items-center gap-2">
+                        @csrf
+                        <button type="submit" class="flex items-center text-gray-500 hover:text-gray-700">
+                            🤍 <span class="ml-1">Liker ({{ $post->likes()->count() }})</span>
+                        </button>
+                    </form>
+                @endif
+            @else
+                <p class="text-sm text-gray-500">Connecte-toi pour liker ce post. ❤️</p>
+            @endauth
+        </div>
+
+        <!-- 💬 Commentaires -->
+        <div class="bg-white p-6 rounded-lg shadow space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Commentaires ({{ $post->comments()->count() }})</h2>
+
+            <!-- Liste des commentaires -->
+            <div class="space-y-3">
+                @forelse($post->comments()->latest()->get() as $comment)
+                    <div class="border-t pt-3 text-sm text-gray-700">
+                        <p class="mb-1">{{ $comment->comment }}</p>
+                        <span class="text-xs text-gray-500">Par {{ $comment->user->name ?? 'Anonyme' }}, le {{ $comment->created_at->format('d/m/Y H:i') }}</span>
+                    </div>
+                @empty
+                    <p class="text-sm text-gray-500">Aucun commentaire pour l’instant.</p>
+                @endforelse
+            </div>
+
+            {{-- <!-- Formulaire de commentaire -->
+            @auth
+                <form action="{{ route('comments.store') }}" method="POST" class="mt-4">
+                    @csrf
+                    <input type="hidden" name="commentable_type" value="App\Models\Post">
+                    <input type="hidden" name="commentable_id" value="{{ $post->id }}">
+                    <textarea name="comment" rows="3" class="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:border-blue-300" placeholder="Votre commentaire..."></textarea>
+                    <button type="submit" class="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Envoyer</button>
+                </form>
+            @else
+                <p class="text-sm text-gray-500">Connecte-toi pour laisser un commentaire.</p>
+            @endauth --}}
+        </div>
+
+    </section>
+    
 @endsection
