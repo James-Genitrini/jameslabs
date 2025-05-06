@@ -5,16 +5,16 @@
         <!-- Section de l'en-tête avec l'image carrée, le titre et le synopsis -->
         <header class="flex items-start mb-8">
             @if($post->hasMedia('thumbnail'))
-            <div class="w-48 h-48 bg-gray-200 overflow-hidden border-2 rounded-lg md:w-36 md:h-36">
-                <img src="{{ $post->getFirstMediaUrl('thumbnail', 'preview') }}" alt="{{ $post->title }}" class="object-cover w-full h-full">
+                <div class="w-1/3 bg-gray-200 overflow-hidden rounded-lg">
+                    <img src="{{ $post->getFirstMediaUrl('thumbnail', 'preview') }}" alt="{{ $post->title }}" class="object-cover w-full h-full">
                 </div>
             @endif
-            <div class="ml-6 flex flex-col justify-start">
+            <div class="ml-6 flex flex-col justify-start w-2/3">
                 <h1 class="text-4xl font-bold text-gray-900 mb-2">{{ $post->title }}</h1>
                 @if($post->synopsis) 
-                    <p class="text-lg text-gray-700">{{ $post->synopsis }}</p>
+                    <p class="text-md italic text-gray-700">{{ $post->synopsis }}</p>
                 @else
-                    <p class="text-lg text-gray-700">Pas de synopsis disponible.</p>
+                    <p class="text-md text-gray-700">Pas de synopsis disponible.</p>
                 @endif
             </div>
         </header>

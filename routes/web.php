@@ -2,11 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    $posts = Post::latest()->get();
-    return view('welcome', compact('posts'));
-});
+Route::get('/', [HomeController::class, 'index']);
+
 
 Route::post('/logout', function () {
     Auth::logout();

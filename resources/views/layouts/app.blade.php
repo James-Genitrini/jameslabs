@@ -11,7 +11,7 @@
 
     <nav class="bg-gray-100 dark:bg-gray-800 shadow-md fixed top-0 left-0 right-0 z-50">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="/" class="text-2xl font-bold text-blue-600 dark:text-blue-400">Mon Blog</a>
+            <a href="/" class="text-2xl font-bold text-blue-600 dark:text-blue-400">Home</a>
             <div>
                 @auth
                     @if(auth()->user()->is_admin)
@@ -33,7 +33,7 @@
     </main>
 
     <footer class="bg-gray-100 dark:bg-gray-800 text-center py-4 shadow-md text-gray-700 dark:text-gray-300">
-        <p>&copy; {{ date('Y') }} Mon Blog - Tous droits réservés</p>
+        <p>&copy; {{ date('Y') }} JamesLabs - Tous droits réservés</p>
     </footer>
 
 </body>
