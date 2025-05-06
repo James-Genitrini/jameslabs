@@ -67,7 +67,7 @@ class PostResource extends Resource
                         ColorPicker::make('color')
                             ->label('Color')
                             ->required()
-                            ->default('#000000'),
+                            ->default('#FFFFFFF'),
                     ]),
                     Tab::make('Content')
                         ->icon('heroicon-o-document-text')

@@ -28,10 +28,10 @@
         </section>
 
         <!-- Section des informations supplémentaires (slug et publication) -->
-        <footer class="text-sm text-gray-500 mt-8 flex flex-col md:flex-row justify-between items-start">
-            <div>
+        <footer class="text-sm text-gray-500 mt-8 flex flex-col md:flex-row justify-end">
+            {{-- <div>
                 <span class="font-semibold">Slug : </span>{{ $post->slug }}
-            </div>
+            </div> --}}
             <div class="mt-2 md:mt-0">
                 <span class="font-semibold">Crédit : </span>{{ $post->created_at->format('d/m/Y H:i') }} par J.G.
             </div>
@@ -71,18 +71,46 @@
             <!-- Liste des commentaires -->
             <div class="space-y-3">
                 @forelse($post->comments()->latest()->get() as $comment)
-                    <div class="border-t pt-3 text-sm text-gray-700">
+                    @if (auth()->check() && auth()->user()->id === $comment->user_id)
+                        <!-- affichage du commentaire en bleu -->
+                        <div class="flex">
+                            <div class="bg-blue-100 p-3 rounded-lg max-w-xs">
+                                <p class="mb-1">{{ $comment->comment }}</p>
+                                <span class="text-xs text-gray-500">Par {{ $comment->user->name ?? 'Anonyme' }}, le {{ $comment->created_at->format('d/m/Y H:i') }}</span>
+                            </div>
+                        </div>
+                        
+
+                    @else
+                        <!-- affichage du commentaire en gris -->
+                        <div class="flex">
+                            <div class="bg-gray-100 p-3 rounded-lg max-w-xs">
+                                <p class="mb-1">{{ $comment->comment }}</p>
+                                <span class="text-xs text-gray-500">Par {{ $comment->user->name ?? 'Anonyme' }}, le {{ $comment->created_at->format('d/m/Y H:i') }}</span>
+                            </div>
+                        </div>
+
+                    @endif
+
+                    @if (auth()->check() && auth()->user()->id === $comment->user_id || auth()?->user()?->is_admin)
+                        <form action="{{ route('posts.comments.destroy', [$post, $comment]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-600">Supprimer</button>
+                        </form>
+                    @endif
+                    {{-- <div class="border-t pt-3 text-sm text-gray-700">
                         <p class="mb-1">{{ $comment->comment }}</p>
                         <span class="text-xs text-gray-500">Par {{ $comment->user->name ?? 'Anonyme' }}, le {{ $comment->created_at->format('d/m/Y H:i') }}</span>
-                    </div>
+                    </div> --}}
                 @empty
                     <p class="text-sm text-gray-500">Aucun commentaire pour l’instant.</p>
                 @endforelse
             </div>
 
-            {{-- <!-- Formulaire de commentaire -->
+            <!-- Formulaire de commentaire -->
             @auth
-                <form action="{{ route('comments.store') }}" method="POST" class="mt-4">
+                <form action="{{ route('posts.comments.store', $post) }}" method="POST" class="mt-4">
                     @csrf
                     <input type="hidden" name="commentable_type" value="App\Models\Post">
                     <input type="hidden" name="commentable_id" value="{{ $post->id }}">
@@ -91,7 +119,7 @@
                 </form>
             @else
                 <p class="text-sm text-gray-500">Connecte-toi pour laisser un commentaire.</p>
-            @endauth --}}
+            @endauth
         </div>
 
     </section>
