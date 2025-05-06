@@ -9,7 +9,7 @@
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-roboto flex flex-col h-screen">
 
-    <nav class="bg-gray-100 dark:bg-gray-800 shadow-md fixed top-0 left-0 right-0 z-50">
+    <nav class="bg-gray-100 dark:bg-gray-800 shadow-md fixed top-0 left-0 right-0 z-50 h-16">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
             <a href="/" class="text-2xl font-bold text-blue-600 dark:text-blue-400">Home</a>
             <div>
@@ -27,8 +27,8 @@
             </div>
         </div>
     </nav>
-
-    <main class="container mx-auto pt-24 pb-6 px-4 flex-1">
+    
+    <main class="container mx-auto pt-2 pb-6 px-4 flex-1 mt-16">
         @yield('content')
     </main>
 
