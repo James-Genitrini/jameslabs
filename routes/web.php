@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostCommentController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,7 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/{post:slug}', function (Post $post) {
     if (!$post->published) {
         if (auth()->check() && auth()->user()->is_admin) {
