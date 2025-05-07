@@ -13,7 +13,7 @@
     <nav class="bg-zinc-900	 dark:bg-gray-800 shadow-md fixed top-0 left-0 right-0 z-50 py-4">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
             <!-- Logo et Titre -->
-            <a href="/" class="text-2xl font-bold text-[#9471a6] dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">
+            <a href="/" class="text-2xl font-bold text-[#9471a6] dark:text-blue-400 hover:text-[#7b5e91] dark:hover:text-blue-300 transition">
                 {{ config('app.name', 'Laravel') }}
             </a>
             
@@ -22,7 +22,7 @@
                 <!-- Lien vers le dashboard (Admin) -->
                 @auth
                     @if(auth()->user()->is_admin)
-                        <a href="/auth" class="text-lg text-[#9471a6] hover:text-blue-600 transition">Dashboard</a>
+                        <a href="/auth" class="text-lg text-[#9471a6] hover:text-[#7b5e91] transition">Dashboard</a>
                     @endif
                 @endauth
 
@@ -41,7 +41,7 @@
                             <img 
                                 src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('images/default-profile.png') }}" 
                                 alt="Profile"
-                                class="w-10 h-10 rounded-full object-cover border-2 border-[#9471a6] hover:border-blue-600 transition"
+                                class="w-10 h-10 rounded-full object-cover border-2 border-[#9471a6] hover:text-[#7b5e91] transition"
                             >
                         </a>
                     @else
