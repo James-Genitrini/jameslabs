@@ -11,12 +11,14 @@ use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
+use Filament\Forms\Components\TagsInput;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\CheckboxColumn;
 use Filament\Tables\Columns\ColorColumn;
+use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
@@ -93,6 +95,12 @@ class PostResource extends Resource
                             // ->multiple()
                             ->reorderable()
                             ->collection('thumbnail'),
+                    TagsInput::make('tags')
+                        ->label('Tags')
+                        ->placeholder('Enter tags')
+                        ->helperText('Add tags to the post')
+                        ->columnSpanFull(),
+                    
                     ])
                 ])->columnSpanFull()
                 ->persistTabInQueryString(),
@@ -131,7 +139,12 @@ class PostResource extends Resource
                     ->sortable(),
                 TextColumn::make('likes_count')
                     ->label('Number of Likes')
+                    ->sortable(),
+                TagsColumn::make('tags')
+                    ->label('Tags')
                     ->sortable()
+                    ->toggleable()
+                    ->searchable(),
                 
             ])
             ->filters([

@@ -8,12 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
 </head>
-<body class="bg-cream dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-roboto flex flex-col h-screen">
+<body class="bg-neutral-900 text-gray-100 font-roboto flex flex-col h-screen">
 
-    <nav class="bg-white dark:bg-gray-800 shadow-md fixed top-0 left-0 right-0 z-50 py-4">
+    <nav class="bg-zinc-900	 dark:bg-gray-800 shadow-md fixed top-0 left-0 right-0 z-50 py-4">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
             <!-- Logo et Titre -->
-            <a href="/" class="text-2xl font-bold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">
+            <a href="/" class="text-2xl font-bold text-[#9471a6] dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition">
                 {{ config('app.name', 'Laravel') }}
             </a>
             
@@ -22,7 +22,7 @@
                 <!-- Lien vers le dashboard (Admin) -->
                 @auth
                     @if(auth()->user()->is_admin)
-                        <a href="/auth" class="text-lg text-gray-600 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition">Dashboard</a>
+                        <a href="/auth" class="text-lg text-[#9471a6] hover:text-blue-600 transition">Dashboard</a>
                     @endif
                 @endauth
 
@@ -31,8 +31,8 @@
                     @auth
                         <form action="{{ route('logout') }}" method="POST" class="inline">
                             @csrf
-                            <button type="submit" class="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-600 transition">
-                                Se déconnecter
+                            <button type="submit" class="text-lg text-red-500 dark:text-red-400 hover:text-red-800 dark:hover:text-red-600 transition">
+                                Déconnexion
                             </button>
                         </form>
 
@@ -41,7 +41,7 @@
                             <img 
                                 src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('images/default-profile.png') }}" 
                                 alt="Profile"
-                                class="w-10 h-10 rounded-full object-cover border-2 border-blue-500 hover:border-blue-600 transition"
+                                class="w-10 h-10 rounded-full object-cover border-2 border-[#9471a6] hover:border-blue-600 transition"
                             >
                         </a>
                     @else
@@ -56,7 +56,7 @@
         @yield('content')
     </main>
 
-    <footer class="bg-gray-100 dark:bg-gray-800 text-center py-4 shadow-md text-gray-700 dark:text-gray-300">
+    <footer class="bg-zinc-900	 dark:bg-gray-700 text-center py-4 shadow-md text-gray-400 dark:text-gray-300">
         <p>&copy; {{ date('Y') }} JamesLabs - Tous droits réservés</p>
     </footer>
 
