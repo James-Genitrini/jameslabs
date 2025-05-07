@@ -7,12 +7,24 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
         $query = Post::where('published', true)->withCount('comments');
 
+        if ($search) {
+            $keywords = preg_split('/\s+/', $search); // Découpe par espace
+    
+            $query->where(function ($q) use ($keywords) {
+                foreach ($keywords as $word) {
+                    $q->orWhere('title', 'like', "%{$word}%")
+                      ->orWhere('synopsis', 'like', "%{$word}%")
+                      ->orWhereJsonContains('tags', $word);
+                }
+            });
+        }
+
         $posts = $query->latest()->paginate(9);
-        
         return view('posts.index', compact('posts'));
     }
 }
