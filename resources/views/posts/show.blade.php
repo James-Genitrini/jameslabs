@@ -40,14 +40,14 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="flex items-center text-red-500 hover:text-red-700">
-                            ❤️ <span class="ml-1">Retirer le like ({{ $post->likes()->count() }})</span>
+                            ❤️ <span class="ml-1">({{ $post->likes()->count() }})</span>
                         </button>
                     </form>
                 @else
                     <form action="{{ route('posts.like', $post) }}" method="POST" class="flex items-center gap-2">
                         @csrf
                         <button type="submit" class="flex items-center text-gray-500 hover:text-gray-700">
-                            🤍 <span class="ml-1">Liker ({{ $post->likes()->count() }})</span>
+                            🤍 <span class="ml-1">({{ $post->likes()->count() }})</span>
                         </button>
                     </form>
                 @endif
@@ -87,11 +87,16 @@
                             <button type="submit" class="text-red-600">Supprimer</button>
                         </form>
                     @endif
+                    {{-- <div class="border-t pt-3 text-sm text-gray-700">
+                        <p class="mb-1">{{ $comment->comment }}</p>
+                        <span class="text-xs text-gray-500">Par {{ $comment->user->name ?? 'Anonyme' }}, le {{ $comment->created_at->format('d/m/Y H:i') }}</span>
+                    </div> --}}
                 @empty
                     <p class="text-sm text-gray-500">Aucun commentaire pour l’instant.</p>
                 @endforelse
             </div>
 
+            <!-- Formulaire de commentaire -->
             @auth
                 <form action="{{ route('posts.comments.store', $post) }}" method="POST" class="mt-4">
                     @csrf

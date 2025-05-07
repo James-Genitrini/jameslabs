@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostLikeController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Http\Controllers\HomeController;
@@ -29,3 +30,8 @@ Route::delete('/posts/{post}/like', [PostLikeController::class, 'destroy'])->nam
 
 Route::post('/posts/{post}/comments', [PostCommentController::class, 'store'])->name('posts.comments.store');
 Route::delete('/posts/{post}/comments/{comment}', [PostCommentController::class, 'destroy'])->name('posts.comments.destroy');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+});
