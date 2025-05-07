@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <article class="bg-white p-6 rounded-lg shadow-md max-w-4xl mx-auto mt-8">
-        <!-- Section de l'en-tête avec l'image carrée, le titre et le synopsis -->
+    <article class="bg-cream p-6 rounded-lg shadow-md max-w-4xl mx-auto mt-8">
         <header class="flex items-start mb-8">
             @if($post->hasMedia('thumbnail'))
                 <div class="w-1/3 bg-gray-200 overflow-hidden rounded-lg">
@@ -19,7 +18,6 @@
             </div>
         </header>
 
-        <!-- Section du contenu du post -->
         <section class="mb-8">
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Contenu de l'article</h2>
             <div class="prose max-w-none">
@@ -27,20 +25,14 @@
             </div>
         </section>
 
-        <!-- Section des informations supplémentaires (slug et publication) -->
         <footer class="text-sm text-gray-500 mt-8 flex flex-col md:flex-row justify-end">
-            {{-- <div>
-                <span class="font-semibold">Slug : </span>{{ $post->slug }}
-            </div> --}}
             <div class="mt-2 md:mt-0">
                 <span class="font-semibold">Crédit : </span>{{ $post->created_at->format('d/m/Y H:i') }} par J.G.
             </div>
         </footer>
     </article>
-    <!-- Zone d'interaction : Like + Commentaires -->
     <section class="max-w-4xl mx-auto mt-8 space-y-8">
 
-        <!-- ❤️ Like -->
         <div class="flex items-center justify-between">
             @auth
                 @if ($post->isLikedBy(auth()->user()))
@@ -64,15 +56,12 @@
             @endauth
         </div>
 
-        <!-- 💬 Commentaires -->
         <div class="bg-white p-6 rounded-lg shadow space-y-4">
             <h2 class="text-xl font-semibold text-gray-800">Commentaires ({{ $post->comments()->count() }})</h2>
 
-            <!-- Liste des commentaires -->
             <div class="space-y-3">
                 @forelse($post->comments()->latest()->get() as $comment)
                     @if (auth()->check() && auth()->user()->id === $comment->user_id)
-                        <!-- affichage du commentaire en bleu -->
                         <div class="flex">
                             <div class="bg-blue-100 p-3 rounded-lg max-w-xs">
                                 <p class="mb-1">{{ $comment->comment }}</p>
@@ -82,7 +71,6 @@
                         
 
                     @else
-                        <!-- affichage du commentaire en gris -->
                         <div class="flex">
                             <div class="bg-gray-100 p-3 rounded-lg max-w-xs">
                                 <p class="mb-1">{{ $comment->comment }}</p>
@@ -99,16 +87,11 @@
                             <button type="submit" class="text-red-600">Supprimer</button>
                         </form>
                     @endif
-                    {{-- <div class="border-t pt-3 text-sm text-gray-700">
-                        <p class="mb-1">{{ $comment->comment }}</p>
-                        <span class="text-xs text-gray-500">Par {{ $comment->user->name ?? 'Anonyme' }}, le {{ $comment->created_at->format('d/m/Y H:i') }}</span>
-                    </div> --}}
                 @empty
                     <p class="text-sm text-gray-500">Aucun commentaire pour l’instant.</p>
                 @endforelse
             </div>
 
-            <!-- Formulaire de commentaire -->
             @auth
                 <form action="{{ route('posts.comments.store', $post) }}" method="POST" class="mt-4">
                     @csrf

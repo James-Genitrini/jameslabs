@@ -6,7 +6,7 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach($posts as $post)
-    <div class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-6 rounded-lg shadow-md flex flex-col h-full"
+    <div class="bg-cream dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-6 rounded-lg shadow-md flex flex-col h-full"
      style="border-top: 25px solid {{ $post->color }};">
                 <h2 class="text-xl font-semibold mb-2">{{ $post->title }}</h2>
                 @if($post->hasMedia('thumbnail'))
