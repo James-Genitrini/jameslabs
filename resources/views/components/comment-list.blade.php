@@ -1,4 +1,4 @@
-<div class="space-y-3 mb-8 max-h-[calc(100vh-200px)] overflow-y-auto">
+<div class="space-y-3 mb-8 max-h-[calc(100vh-200px)]">
     @forelse($post->comments()->latest()->get() as $comment)
         @php
             $isAuthor = auth()->check() && auth()->user()->id === $comment->user_id;

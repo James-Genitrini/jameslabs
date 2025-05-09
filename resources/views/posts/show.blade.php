@@ -35,21 +35,16 @@
             </footer>
         </div>
 
-        <!-- Section Commentaires et Like -->
         <div class="w-full md:w-1/4 bg-neutral-800 text-gray-200 p-6 rounded-lg max-h-screen">
             <!-- Like -->
             <x-like-component :post="$post" />
-            
-            <!-- Liste des commentaires (rendue scrollable) -->
-            <div class="space-y-3 mb-8 overflow-y-auto" style="height: 35vh;">
+
+            <div class="space-y-3 mb-6 overflow-y-auto" style="max-height: 35vh;">
                 <x-comment-list :post="$post" />
             </div>
-            
+
             <!-- Formulaire de commentaire -->
             <x-comment-form :post="$post" />
         </div>
-
-
-
     </article>
 @endsection
