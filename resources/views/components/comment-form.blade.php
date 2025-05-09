@@ -10,6 +10,15 @@
             Envoyer
         </button>
     </form>
+    @if ($errors->any())
+        <div class="mt-4">
+            <ul class="list-disc list-inside text-red-500">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @else
     <p class="text-sm text-gray-400 mt-4">Connecte-toi pour laisser un commentaire.</p>
 @endauth
