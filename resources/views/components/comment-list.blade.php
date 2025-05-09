@@ -6,12 +6,13 @@
 
         <div class="flex items-start gap-4">
             @if($comment->user->profile_picture)
-                <img src="{{ asset('storage/' . $comment->user->profile_picture) }}" alt="photo" class="rounded-full w-16 h-16 object-cover">
+                <img src="{{ asset('storage/' . $comment->user->profile_picture) }}" alt="photo" class="rounded-full w-12 h-12 object-cover">
             @else
-                <div class="rounded-full bg-gray-200 w-16 h-16 flex items-center justify-center text-gray-400 cursor-pointer">
-                    <img src='img/noprofile.png' alt="photo" class="rounded-full w-16 h-16 object-cover">
+                <div class="rounded-full bg-gray-200 w-12 h-12 flex items-center justify-center text-gray-400 cursor-pointer">
+                    <img src='img/noprofile.png' alt="photo" class="rounded-full w-12 h-12 object-cover">
                 </div>
             @endif
+
 
             <div class="relative {{ $isAuthor ? 'bg-[#2d1f38] text-gray-200' : 'bg-[#2a2a3b] text-gray-300' }} p-3 rounded-lg max-w-xl w-full">
                 @if ($isAuthor || auth()?->user()?->is_admin)
