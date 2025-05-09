@@ -10,15 +10,36 @@
             Envoyer
         </button>
     </form>
-    @if ($errors->any())
-        <div class="mt-4">
-            <ul class="list-disc list-inside text-red-500">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
+
+        <div id="error-modal" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 hidden">
+        <div class="bg-white p-6 rounded-lg max-w-sm w-full">
+            <h3 class="text-xl font-semibold text-red-500">Erreur</h3>
+            <ul class="list-disc list-inside text-red-500 mt-2" id="error-list">
+                <!-- Les erreurs s'afficheront ici -->
             </ul>
+            <button id="close-modal" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Fermer</button>
         </div>
+    </div>
+
+    @if ($errors->any())
+        <script>
+            // Afficher la popup d'erreur
+            document.getElementById('error-modal').classList.remove('hidden');
+
+            const errorList = document.getElementById('error-list');
+            @foreach ($errors->all() as $error)
+                const li = document.createElement('li');
+                li.textContent = "{{ $error }}";
+                errorList.appendChild(li);
+            @endforeach
+
+            // Fermer la popup lorsque l'utilisateur clique sur le bouton "Fermer"
+            document.getElementById('close-modal').addEventListener('click', function() {
+                document.getElementById('error-modal').classList.add('hidden');
+            });
+        </script>
     @endif
+
 @else
     <p class="text-sm text-gray-400 mt-4">Connecte-toi pour laisser un commentaire.</p>
 @endauth

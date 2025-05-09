@@ -15,9 +15,10 @@ class PostCommentController extends Controller
         if ($comment) {
             $cleanComment = strip_tags($comment);
             if ($cleanComment !== $comment) {
-                return back()->withErrors(['comment' => 'Invalid comment']);
+                session()->flash('error', 'Invalid comment');
+                return back();
             }
-            
+
             $post->comments()->create([
                 'user_id' => auth()->id(),
                 'comment' => $cleanComment
