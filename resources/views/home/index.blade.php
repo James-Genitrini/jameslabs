@@ -2,12 +2,36 @@
 
 @section('content')
     <h1 class="text-3xl font-bold text-center mb-6 text-gray-400">Bienvenue sur JamesLabs !</h1>
-    <p class="text-center mb-6 text-gray-400">Découvrez les derniers posts</p>
+    <p class="text-center mb-6 text-gray-400">Découvrez nos meilleurs contenus</p>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    @foreach($latestPosts as $post)
-        <x-post-card :post="$post" />
-    @endforeach
+    <div class="flex justify-center space-x-4 mb-6">
+        <button onclick="switchCarousel('latest')" class="px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-800 transition">Derniers</button>
+        <button onclick="switchCarousel('liked')" class="px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-800 transition">Les + Likés</button>
+    </div>
+
+    {{-- Carrousels --}}
+    <div id="carousel-latest" class="carousel-container">
+        <div class="swiper mySwiper mb-10">
+            <div class="swiper-wrapper">
+                @foreach($latestPosts as $post)
+                    <div class="swiper-slide">
+                        <x-post-card :post="$post" />
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+    <div id="carousel-liked" class="carousel-container hidden">
+        <div class="swiper mySwiper mb-10">
+            <div class="swiper-wrapper">
+                @foreach($mostLikedPosts as $post)
+                    <div class="swiper-slide">
+                        <x-post-card :post="$post" />
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
     <br>
     <div class="flex justify-center mb-10">

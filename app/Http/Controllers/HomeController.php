@@ -18,6 +18,9 @@ class HomeController extends Controller
 
         $latestPosts = $allPosts->take(3);
 
-        return view('home.index', compact( 'latestPosts'));
+        $mostLikedPosts = Post::withCount('likes')->orderByDesc('likes_count')->take(3)->get();
+
+
+        return view('home.index', compact( 'latestPosts', 'mostLikedPosts'));
     }
 }

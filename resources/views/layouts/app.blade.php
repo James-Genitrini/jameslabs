@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     @vite('resources/css/app.css')
 </head>
 <body class="bg-neutral-900 text-gray-100 font-roboto flex flex-col h-screen">
@@ -59,6 +60,33 @@
     <footer class="bg-zinc-900	 dark:bg-gray-700 text-center py-4 shadow-md text-gray-400 dark:text-gray-300">
         <p>&copy; {{ date('Y') }} JamesLabs - Tous droits réservés</p>
     </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    // Init Swipers
+    const swiperEls = document.querySelectorAll('.mySwiper');
+    swiperEls.forEach(el => {
+        new Swiper(el, {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            breakpoints: {
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+            },
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false
+            }
+        });
+    });
+
+    // Switch between carousels
+    function switchCarousel(type) {
+        document.querySelectorAll('.carousel-container').forEach(el => el.classList.add('hidden'));
+        document.getElementById('carousel-' + type).classList.remove('hidden');
+    }
+</script>
 
 </body>
 </html>
