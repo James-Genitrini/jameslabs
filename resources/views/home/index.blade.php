@@ -27,7 +27,7 @@
             <div class="swiper-wrapper">
                 @foreach($mostLikedPosts as $post)
                     <div class="swiper-slide">
-                        <x-post-card :post="$post" />
+                        <x-post-card :post="$post"/>
                     </div>
                 @endforeach
             </div>

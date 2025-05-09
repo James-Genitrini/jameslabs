@@ -86,6 +86,19 @@
         document.querySelectorAll('.carousel-container').forEach(el => el.classList.add('hidden'));
         document.getElementById('carousel-' + type).classList.remove('hidden');
     }
+    function copyToClipboard(text) {
+    // Créer un élément temporaire
+    const tempInput = document.createElement("input");
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999); // pour mobile
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+
+    alert("Texte copié dans le presse-papiers : " + text);
+    }
+
 </script>
 
 </body>

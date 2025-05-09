@@ -14,16 +14,7 @@ style="border-top: 25px solid #c6a2da94;">
     @endauth
 
     <h2 class="text-xl font-semibold mb-2">{{ $post->title }}</h2>
-    @if($post->hasMedia('thumbnail'))
-        <div class="w-full h-48 bg-gray-200 overflow-hidden rounded-lg mb-4">
-            <img src="{{ $post->getFirstMediaUrl('thumbnail', 'preview') }}" alt="{{ $post->title }}" class="object-cover w-full h-full">
-        </div>
-    @else
-        <div class="w-full h-48 bg-gray-200 overflow-hidden rounded-lg mb-4">
-            <img src="{{ asset('img/noimage.jpg') }}" alt="Default Thumbnail" class="object-cover w-full h-full">
-        </div>
-    @endif
-    <p class="text-gray-600 dark:text-gray-300 mb-4">{{ Str::limit($post->synopsis, 100) }}</p>
+    {{-- <p class="text-gray-600 dark:text-gray-300 mb-4">{{ Str::limit($post->synopsis, 100) }}</p> --}}
     @if($post->tags && count($post->tags) > 0)
     <div class="mt-4 flex flex-wrap gap-2">
         @foreach($post->tags as $tag)
@@ -33,8 +24,18 @@ style="border-top: 25px solid #c6a2da94;">
             </span>
         @endforeach
     </div>
-    @endif
     <br>
+
+    @endif
+        @if($post->hasMedia('thumbnail'))
+        <div class="w-full h-48 bg-gray-200 overflow-hidden rounded-lg mb-4">
+            <img src="{{ $post->getFirstMediaUrl('thumbnail', 'preview') }}" alt="{{ $post->title }}" class="object-cover w-full h-full">
+        </div>
+    @else
+        <div class="w-full h-48 bg-gray-200 overflow-hidden rounded-lg mb-4">
+            <img src="{{ asset('img/noimage.jpg') }}" alt="Default Thumbnail" class="object-cover w-full h-full">
+        </div>
+    @endif
     <div class="mt-auto flex items-center justify-between">
         <span class="text-sm text-gray-500 dark:text-gray-400">
             {{ $post->created_at->format('d/m/Y H:i') }}
@@ -71,9 +72,15 @@ style="border-top: 25px solid #c6a2da94;">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
         </svg>
     
+        {{-- Copy link --}}
+         
+        <button onclick="copyToClipboard('{{ route('posts.show', $post->slug) }}')" class="text-gray-400 hover:text-gray-200">
+            <img src="{{ asset('img/share.svg') }}" alt="Partager" class="w-4 h-4">
+        </button>
+
         <a href="{{ route('posts.show', $post->slug) }}"
         class="ml-auto text-blue-500 hover:text-purple-400 text-sm">
             Lire plus
         </a>
-    </div>    
+    </div>
 </div>
