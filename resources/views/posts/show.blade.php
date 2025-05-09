@@ -9,7 +9,7 @@
         </a>
 
         <!-- Section Article -->
-        <div class="flex-1 w-full md:w-3/4 h-full overflow-auto custom-scrollbar mt-14"> <!-- Ajout de margin-top pour déplacer tout le contenu sous la flèche -->
+        <div class="flex-1 w-full md:w-3/4 h-80vh overflow-auto custom-scrollbar mt-14"> <!-- Ajout de margin-top pour déplacer tout le contenu sous la flèche -->
             <header class="flex items-start mb-8">
                 @if($post->hasMedia('thumbnail'))
                     <div class="w-1/3 bg-gray-200 overflow-hidden rounded-lg">
