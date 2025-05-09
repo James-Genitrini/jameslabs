@@ -7,6 +7,10 @@ style="border-top: 25px solid #c6a2da94;">
         <div class="w-full h-48 bg-gray-200 overflow-hidden rounded-lg mb-4">
             <img src="{{ $post->getFirstMediaUrl('thumbnail', 'preview') }}" alt="{{ $post->title }}" class="object-cover w-full h-full">
         </div>
+    @else
+        <div class="w-full h-48 bg-gray-200 overflow-hidden rounded-lg mb-4">
+            <img src="{{ asset('img/noimage.jpg') }}" alt="Default Thumbnail" class="object-cover w-full h-full">
+        </div>
     @endif
     <p class="text-gray-600 dark:text-gray-300 mb-4">{{ Str::limit($post->synopsis, 200) }}</p>
     @if($post->tags && count($post->tags) > 0)

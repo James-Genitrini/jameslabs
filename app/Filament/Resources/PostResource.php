@@ -99,6 +99,7 @@ class PostResource extends Resource
                         ->label('Tags')
                         ->placeholder('Enter tags')
                         ->helperText('Add tags to the post')
+                        ->required()
                         ->columnSpanFull(),
                     
                     ])

@@ -20,7 +20,7 @@
                     <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="photo" class="rounded-full w-32 h-32 object-cover cursor-pointer" id="profile-picture">
                 @else
                     <div class="rounded-full bg-gray-200 w-32 h-32 flex items-center justify-center text-gray-400 cursor-pointer" id="profile-picture">
-                        <span class="text-lg">No Image</span>
+                        <img src='img/noprofile.png' alt="photo" class="rounded-full w-32 h-32 object-cover cursor-pointer" id="profile-picture">
                     </div>
                 @endif
                 

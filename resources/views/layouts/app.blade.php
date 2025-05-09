@@ -40,7 +40,7 @@
                         <!-- Photo de profil -->
                         <a href="{{ route('profile.show') }}" class="relative inline-block">
                             <img 
-                                src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('images/default-profile.png') }}" 
+                                src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : asset('img/noprofile.png') }}"
                                 alt="Profile"
                                 class="w-10 h-10 rounded-full object-cover border-2 border-[#9471a6] hover:text-[#7b5e91] transition"
                             >
