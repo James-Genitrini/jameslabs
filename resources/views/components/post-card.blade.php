@@ -14,7 +14,7 @@ style="border-top: 25px solid #c6a2da94;">
         @foreach($post->tags as $tag)
             <span class="inline-block py-1 px-3 rounded-full text-sm"
                 style="background-color: #e1c0f2;">
-                #{{ $tag }}
+                {{ $tag }}
             </span>
         @endforeach
     </div>

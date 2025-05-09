@@ -5,8 +5,8 @@
     <p class="text-center mb-6 text-gray-400">Découvrez nos meilleurs contenus</p>
 
     <div class="flex justify-center space-x-4 mb-6">
-        <button onclick="switchCarousel('latest')" class="px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-800 transition">Derniers</button>
-        <button onclick="switchCarousel('liked')" class="px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-800 transition">Les + Likés</button>
+        <button onclick="switchCarousel('latest')" class="px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-800 transition">Nouveaux</button>
+        <button onclick="switchCarousel('liked')" class="px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-800 transition">Trending</button>
     </div>
 
     {{-- Carrousels --}}

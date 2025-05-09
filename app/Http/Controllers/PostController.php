@@ -24,7 +24,7 @@ class PostController extends Controller
             });
         }
 
-        $posts = $query->latest()->paginate(12);
+        $posts = $query->latest()->paginate(4);
         return view('posts.index', compact('posts'));
     }
 }

@@ -71,7 +71,7 @@
             spaceBetween: 10,
             breakpoints: {
                 640: { slidesPerView: 2 },
-                1024: { slidesPerView: 3 }
+                1024: { slidesPerView: 4 }
             },
             loop: true,
             autoplay: {
