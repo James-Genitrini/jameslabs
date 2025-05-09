@@ -2,6 +2,17 @@
 
 <div class="bg-[#f2e3fa] text-gray-900 p-6 rounded-lg shadow-md flex flex-col h-full"
 style="border-top: 25px solid #c6a2da94;">
+    @auth
+        @if(auth()->user()->is_admin)
+            {{-- Bouton d'édition (stylo) --}}
+            <a href="{{ url('auth/posts/' . $post->id . '/edit') }}" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l2.121 2.121a2.25 2.25 0 0 1 0 3.182l-9.9 9.9a2.25 2.25 0 0 1-.707.5l-3.75 1.25a1.125 1.125 0 0 1-1.362-1.362l1.25-3.75a2.25 2.25 0 0 1 .5-.707l9.9-9.9a2.25 2.25 0 0 1 3.182 0zM15.75 6l-9 9m12-6h3v3m-3-3v3m3-3h-3" />
+                </svg>
+            </a>
+        @endif
+    @endauth
+
     <h2 class="text-xl font-semibold mb-2">{{ $post->title }}</h2>
     @if($post->hasMedia('thumbnail'))
         <div class="w-full h-48 bg-gray-200 overflow-hidden rounded-lg mb-4">
