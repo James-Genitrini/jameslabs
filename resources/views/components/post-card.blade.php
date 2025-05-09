@@ -40,47 +40,55 @@ style="border-top: 25px solid #c6a2da94;">
         <span class="text-sm text-gray-500 dark:text-gray-400">
             {{ $post->created_at->format('d/m/Y H:i') }}
         </span>
-        
     </div>
-    <div class="mt-2 text-sm text-gray-600 dark:text-gray-400 flex items-center gap-1">
-        {{ $post->likes()->count() }}
 
-        @auth
-            @if ($post->isLikedBy(auth()->user()))
-                <form action="{{ route('posts.unlike', $post) }}" method="POST" class="flex items-center gap-2">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="flex items-center text-pink-400 hover:text-pink-500">
-                        ❤️
-                    </button>
-                </form>
-            @else
-                <form action="{{ route('posts.like', $post) }}" method="POST" class="flex items-center gap-2">
-                    @csrf
-                    <button type="submit" class="flex items-center text-gray-400 hover:text-gray-200">
-                        🤍
-                    </button>
-                </form>
-            @endif
-        @endauth
-        {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-        </svg> --}}
-    
-        {{ $post->comments_count }}
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-        </svg>
-    
-        {{-- Copy link --}}
-         
-        <button onclick="copyToClipboard('{{ route('posts.show', $post->slug) }}')" class="text-gray-400 hover:text-gray-200">
-            <img src="{{ asset('img/share.svg') }}" alt="Partager" class="w-4 h-4">
-        </button>
+    <div class="mt-auto pt-4 flex items-center justify-between text-sm text-gray-600">
 
-        <a href="{{ route('posts.show', $post->slug) }}"
-        class="ml-auto text-blue-500 hover:text-purple-400 text-sm">
-            Lire plus
-        </a>
+        {{-- Groupe de gauche : Likes et Commentaires --}}
+        <div class="flex items-center gap-4">
+
+            {{-- Likes --}}
+            <div class="flex items-center gap-1">
+                @auth
+                    @if ($post->isLikedBy(auth()->user()))
+                        <form action="{{ route('posts.unlike', $post) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-pink-500 cursor-pointer hover:text-pink-600">❤️</button>
+                        </form>
+                    @else
+                        <form action="{{ route('posts.like', $post) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="text-gray-400 cursor-pointer hover:text-gray-600">🤍</button>
+                        </form>
+                    @endif
+                @endauth
+                <span>{{ $post->likes()->count() }}</span>
+            </div>
+
+            {{-- Commentaires --}}
+            <div class="flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM8.25 9.75h.375m3.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM12 9.75h.375m3.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM15.75 9.75h-.375M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3a48.394 48.394 0 0 0-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                </svg>
+                <span>{{ $post->comments_count }}</span>
+            </div>
+        </div>
+
+        {{-- Groupe de droite : Partager et Lire plus --}}
+        <div class="flex items-center gap-4">
+
+            {{-- Copier le lien --}}
+            <button onclick="copyToClipboard('{{ route('posts.show', $post->slug) }}')" class="text-gray-400 hover:bg-[#c6a2da94] hover:text-gray-600 transition cursor-pointer">
+                <img src="{{ asset('img/share.svg') }}" alt="Partager" class="w-4 h-4">
+            </button>
+
+            {{-- Lire plus --}}
+            <a href="{{ route('posts.show', $post->slug) }}"
+            class="text-purple-600 hover:text-purple-800 font-medium">
+                Lire plus →
+            </a>
+        </div>
     </div>
+
 </div>
