@@ -1,10 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-    <article class="bg-cream p-6 rounded-lg shadow-md max-w-7xl mx-auto mt-8 flex flex-col md:flex-row gap-8" style="height: 75vh;">
+    <article class="bg-cream p-6 rounded-lg shadow-md max-w-7xl mx-auto mt-8 flex flex-col md:flex-row gap-8 relative" style="height: 75vh;">
         
+        <!-- Flèche de retour (positionnée en haut à gauche, à l'intérieur du contenu) -->
+        <a href="{{ route('posts.index') }}" class="absolute top-4 left-4 text-3xl text-gray-300 hover:text-gray-500 transition z-10">
+            &#8592; Retour à la liste des articles
+        </a>
+
         <!-- Section Article -->
-        <div class="flex-1 w-full md:w-3/4 h-full overflow-auto">
+        <div class="flex-1 w-full md:w-3/4 h-full overflow-auto custom-scrollbar mt-14"> <!-- Ajout de margin-top pour déplacer tout le contenu sous la flèche -->
             <header class="flex items-start mb-8">
                 @if($post->hasMedia('thumbnail'))
                     <div class="w-1/3 bg-gray-200 overflow-hidden rounded-lg">
@@ -40,7 +45,7 @@
             <!-- Like -->
             <x-like-component :post="$post" />
 
-            <div class="space-y-3 mb-6 overflow-y-auto" style="height: 40vh;">
+            <div class="space-y-3 mb-6 overflow-y-auto custom-scrollbar" style="height: 40vh;">
                 <x-comment-list :post="$post" />
             </div>
 
@@ -48,4 +53,22 @@
             <x-comment-form :post="$post" />
         </div>
     </article>
+
+    <style>
+        /* Masquer les barres de défilement tout en permettant le défilement */
+        .custom-scrollbar {
+            overflow: scroll;  /* Permet le défilement */
+            scrollbar-width: none; /* Masque la barre de défilement sur Firefox */
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;  /* Masque la barre de défilement sur Chrome, Safari, et autres navigateurs basés sur Webkit */
+        }
+
+        /* Flèche de retour (positionnement absolu) */
+        a {
+            z-index: 1000; /* Assure que la flèche soit au-dessus du contenu */
+            font-weight: bold;
+        }
+    </style>
 @endsection

@@ -8,6 +8,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     @vite('resources/css/app.css')
+    <style>
+        /* Masquer la barre de défilement pour tout le site tout en permettant le défilement */
+        body, html {
+            overflow: scroll;  /* Permet le défilement */
+            scrollbar-width: none; /* Masque la barre de défilement sur Firefox */
+        }
+
+        /* Masquer la barre de défilement pour les navigateurs basés sur Webkit (Chrome, Safari) */
+        body::-webkit-scrollbar, html::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+
 </head>
 <body class="bg-neutral-900 text-gray-100 font-roboto flex flex-col h-screen">
 
