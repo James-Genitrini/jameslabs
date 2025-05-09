@@ -82,7 +82,6 @@ class PostResource extends Resource
                                 ->label('Content')
                                 ->helperText('<img src="/chemin/vers/image.jpg" alt="Description" style="width: 300px;" />')
                                 ->required()
-                                ->maxLength(300)
                                 ->columnSpanFull(),
                             Checkbox::make('published')
                                 ->label('Published')
