@@ -23,7 +23,7 @@ style="border-top: 25px solid #c6a2da94;">
             <img src="{{ asset('img/noimage.jpg') }}" alt="Default Thumbnail" class="object-cover w-full h-full">
         </div>
     @endif
-    <p class="text-gray-600 dark:text-gray-300 mb-4">{{ Str::limit($post->synopsis, 200) }}</p>
+    <p class="text-gray-600 dark:text-gray-300 mb-4">{{ Str::limit($post->synopsis, 100) }}</p>
     @if($post->tags && count($post->tags) > 0)
     <div class="mt-4 flex flex-wrap gap-2">
         @foreach($post->tags as $tag)
