@@ -17,7 +17,9 @@
             <div class="relative">
                 <!-- Image de profil -->
                 @if($user->profile_picture)
-                    <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="photo" class="rounded-full w-32 h-32 object-cover cursor-pointer" id="profile-picture">
+                    <div class="rounded-full bg-gray-200 w-32 h-32 flex items-center justify-center text-gray-400 cursor-pointer" id="profile-picture">
+                        <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="photo" class="rounded-full w-32 h-32 object-cover cursor-pointer" id="profile-picture">
+                    </div>
                 @else
                     <div class="rounded-full bg-gray-200 w-32 h-32 flex items-center justify-center text-gray-400 cursor-pointer" id="profile-picture">
                         <img src='img/noprofile.png' alt="photo" class="rounded-full w-32 h-32 object-cover cursor-pointer" id="profile-picture">
