@@ -1,6 +1,6 @@
 @props(['post'])
 
-<div class="bg-[#f2e3fa] text-gray-900 p-6 rounded-lg shadow-md flex flex-col h-full group relative"
+<div class="bg-[#e8d8f0] text-gray-900 p-6 rounded-lg shadow-md flex flex-col h-full group relative"
      style="border-top: 25px solid #c6a2da94;">
     @auth
         @if(auth()->user()->is_admin)
@@ -18,7 +18,7 @@
     @if($post->tags && count($post->tags) > 0)
         <div class="mt-4 flex flex-wrap gap-2">
             @foreach($post->tags as $tag)
-                <span class="inline-block py-1 px-3 rounded-full text-sm" style="background-color: #e1c0f2;">
+                <span class="inline-block py-1 px-3 rounded-full text-sm" style="background-color: #d6a8ed;">
                     {{ $tag }}
                 </span>
             @endforeach
