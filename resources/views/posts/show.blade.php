@@ -13,7 +13,7 @@
 
 
         <!-- Section Article -->
-        <div id="mainContent" class="flex-1 w-full md:w-3/4 h-80vh overflow-auto custom-scrollbar mt-14 transition-[width] duration-300 ease-in-out">
+        <div id="mainContent" class="flex-1 w-full md:w-3/4 h-80vh overflow-auto custom-scrollbar mt-14 transition-[width] duration-300 ease-in-out display-flex flex-direction-column">
             <button onclick="toggleSidebar()" class="sticky top-4 float-right bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 z-20">
                 ⇆
             </button>
@@ -34,7 +34,7 @@
                 </div>
             </header>
 
-            <section class="mb-8">
+            <section class="mb-8 flex-1">
                 <h2 class="text-2xl font-semibold text-gray-300 mb-4">Contenu de l'article</h2>
                 <div class="prose max-w-none">
                     {!! Str::markdown($post->content) !!}
