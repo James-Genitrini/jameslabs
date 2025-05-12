@@ -15,19 +15,15 @@
         <!-- Photo de profil -->
         <div class="flex justify-center mb-6">
             <div class="relative">
-                <!-- Image de profil -->
-                @if($user->profile_picture)
-                    <div class="rounded-full bg-gray-200 w-32 h-32 flex items-center justify-center text-gray-400 cursor-pointer" id="profile-picture">
-                        <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="photo" class="rounded-full w-32 h-32 object-cover cursor-pointer" id="profile-picture">
-                    </div>
-                @else
-                    <div class="rounded-full bg-gray-200 w-32 h-32 flex items-center justify-center text-gray-400 cursor-pointer" id="profile-picture">
-                        <img src='img/noprofile.png' alt="photo" class="rounded-full w-32 h-32 object-cover cursor-pointer" id="profile-picture">
-                    </div>
-                @endif
+                <img 
+                    src="{{ $user->profile_picture ? asset('storage/' . $user->profile_picture) : asset('img/noprofile.png') }}" 
+                    id="profile-picture" 
+                    alt="photo" 
+                    class="rounded-full w-32 h-32 object-cover cursor-pointer"
+                >
                 
-                <!-- Input file caché qui se déclenche au clic -->
-                <input type="file" name="profile_picture" id="profile-picture-input" class="absolute inset-0 opacity-0 cursor-pointer" onchange="previewImage(event)">
+                <input type="file" name="profile_picture" id="profile-picture-input"
+                    class="absolute inset-0 opacity-0 cursor-pointer" onchange="previewImage(event)">
             </div>
         </div>
 
