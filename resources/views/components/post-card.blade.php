@@ -1,7 +1,7 @@
 @props(['post'])
 
-<div class="bg-[#f2e3fa] text-gray-900 p-6 rounded-lg shadow-md flex flex-col h-full"
-style="border-top: 25px solid #c6a2da94;">
+<div class="bg-[#f2e3fa] text-gray-900 p-6 rounded-lg shadow-md flex flex-col h-full group relative"
+     style="border-top: 25px solid #c6a2da94;">
     @auth
         @if(auth()->user()->is_admin)
             {{-- Bouton d'édition (stylo) --}}
@@ -14,20 +14,19 @@ style="border-top: 25px solid #c6a2da94;">
     @endauth
 
     <h2 class="text-xl font-semibold mb-2">{{ $post->title }}</h2>
-    {{-- <p class="text-gray-600 dark:text-gray-300 mb-4">{{ Str::limit($post->synopsis, 100) }}</p> --}}
-    @if($post->tags && count($post->tags) > 0)
-    <div class="mt-4 flex flex-wrap gap-2">
-        @foreach($post->tags as $tag)
-            <span class="inline-block py-1 px-3 rounded-full text-sm"
-                style="background-color: #e1c0f2;">
-                {{ $tag }}
-            </span>
-        @endforeach
-    </div>
-    <br>
 
+    @if($post->tags && count($post->tags) > 0)
+        <div class="mt-4 flex flex-wrap gap-2">
+            @foreach($post->tags as $tag)
+                <span class="inline-block py-1 px-3 rounded-full text-sm" style="background-color: #e1c0f2;">
+                    {{ $tag }}
+                </span>
+            @endforeach
+        </div>
+        <br>
     @endif
-        @if($post->hasMedia('thumbnail'))
+
+    @if($post->hasMedia('thumbnail'))
         <div class="w-full h-48 bg-gray-200 overflow-hidden rounded-lg mb-4">
             <img src="{{ $post->getFirstMediaUrl('thumbnail', 'preview') }}" alt="{{ $post->title }}" class="object-cover w-full h-full">
         </div>
@@ -36,6 +35,7 @@ style="border-top: 25px solid #c6a2da94;">
             <img src="{{ asset('img/noimage.jpg') }}" alt="Default Thumbnail" class="object-cover w-full h-full">
         </div>
     @endif
+
     <div class="mt-auto flex items-center justify-between">
         <span class="text-sm text-gray-500 dark:text-gray-400">
             {{ $post->created_at->format('d/m/Y H:i') }}
@@ -43,10 +43,8 @@ style="border-top: 25px solid #c6a2da94;">
     </div>
 
     <div class="mt-auto pt-4 flex items-center justify-between text-sm text-gray-600">
-
         {{-- Groupe de gauche : Likes et Commentaires --}}
         <div class="flex items-center gap-4">
-
             {{-- Likes --}}
             <div class="flex items-center gap-1">
                 @auth
@@ -73,22 +71,22 @@ style="border-top: 25px solid #c6a2da94;">
                 </svg>
                 <span>{{ $post->comments_count }}</span>
             </div>
+
+                        {{-- Copier le lien --}}
+            <button onclick="copyToClipboard('{{ route('posts.show', $post->slug) }}')" class="text-gray-400 hover:bg-[#c6a2da94] hover:text-gray-600 transition cursor-pointer">
+                <img src="{{ asset('img/share.svg') }}" alt="Partager" class="w-4 h-4">
+            </button>
         </div>
 
         {{-- Groupe de droite : Partager et Lire plus --}}
         <div class="flex items-center gap-4">
 
-            {{-- Copier le lien --}}
-            <button onclick="copyToClipboard('{{ route('posts.show', $post->slug) }}')" class="text-gray-400 hover:bg-[#c6a2da94] hover:text-gray-600 transition cursor-pointer">
-                <img src="{{ asset('img/share.svg') }}" alt="Partager" class="w-4 h-4">
-            </button>
 
-            {{-- Lire plus --}}
+            {{-- Lire plus (bouton visible au hover) --}}
             <a href="{{ route('posts.show', $post->slug) }}"
-            class="text-purple-600 hover:text-purple-800 font-medium">
+               class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700">
                 Lire plus →
             </a>
         </div>
     </div>
-
 </div>
