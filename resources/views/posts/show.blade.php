@@ -12,7 +12,6 @@
         </button> --}}
 
 
-        <!-- Section Article -->
         <div id="mainContent" class="flex-1 w-full md:w-3/4 h-80vh overflow-auto custom-scrollbar mt-14 transition-[width] duration-300 ease-in-out display-flex flex-direction-column">
             <button onclick="toggleSidebar()" class="sticky top-4 float-right bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 z-20">
                 ⇆
@@ -48,16 +47,13 @@
             </footer>
         </div>
 
-        <!-- Section Commentaires (visible sur grands écrans uniquement) -->
         <div id="sidebar" class="w-full md:w-1/4 bg-neutral-800 text-gray-200 p-6 rounded-lg max-h-screen transition-all duration-300 hidden-by-toggle">
-            <!-- Like -->
             <x-like-component :post="$post" />
 
             <div class="space-y-3 mb-6 overflow-y-auto custom-scrollbar" style="height: 40vh;">
                 <x-comment-list :post="$post" />
             </div>
 
-            <!-- Formulaire de commentaire -->
             <x-comment-form :post="$post" />
         </div>
     </article>
@@ -82,7 +78,6 @@
             }
         }
 
-        // Rétablir l'état de la sidebar au chargement
         window.addEventListener('DOMContentLoaded', () => {
             const sidebarOpen = localStorage.getItem('sidebarOpen') === 'true';
             const sidebar = document.getElementById('sidebar');
@@ -114,7 +109,7 @@
 
         /* Flèche de retour (positionnement absolu) */
         a {
-            z-index: 1000; /* Assure que la flèche soit au-dessus du contenu */
+            z-index: 1000;
             font-weight: bold;
         }
 

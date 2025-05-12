@@ -9,7 +9,6 @@
         <button onclick="switchCarousel('liked')" class="px-4 py-2 bg-purple-700 text-white rounded hover:bg-purple-800 transition">Trending</button>
     </div>
 
-    {{-- Carrousels --}}
     <div id="carousel-latest" class="carousel-container">
         <div class="swiper mySwiper mb-10">
             <div class="swiper-wrapper">
@@ -33,7 +32,9 @@
             </div>
         </div>
     </div>
+
     <br>
+
     <div class="flex justify-center mb-10">
         <a href="{{ route('posts.index') }}" class="bg-purple-600 text-white px-6 py-2 rounded hover:bg-purple-700 transition shadow-md">
             Voir tous les posts

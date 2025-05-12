@@ -43,9 +43,8 @@
     </div>
 
     <div class="mt-auto pt-4 flex items-center justify-between text-sm text-gray-600">
-        {{-- Groupe de gauche : Likes et Commentaires --}}
+        
         <div class="flex items-center gap-4">
-            {{-- Likes --}}
             <div class="flex items-center gap-1">
                 @auth
                     @if ($post->isLikedBy(auth()->user()))
@@ -64,7 +63,6 @@
                 <span>{{ $post->likes()->count() }}</span>
             </div>
 
-            {{-- Commentaires --}}
             <div class="flex items-center gap-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.625 9.75a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM8.25 9.75h.375m3.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM12 9.75h.375m3.75 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM15.75 9.75h-.375M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 0 1 .778-.332 48.294 48.294 0 0 0 5.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3a48.394 48.394 0 0 0-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
@@ -72,21 +70,17 @@
                 <span>{{ $post->comments_count }}</span>
             </div>
 
-                        {{-- Copier le lien --}}
             <button onclick="copyToClipboard('{{ route('posts.show', $post->slug) }}')" class="text-gray-400 hover:bg-[#c6a2da94] hover:text-gray-600 transition cursor-pointer">
                 <img src="{{ asset('img/share.svg') }}" alt="Partager" class="w-4 h-4">
             </button>
         </div>
 
-        {{-- Groupe de droite : Partager et Lire plus --}}
         <div class="flex items-center gap-4">
-
-
-            {{-- Lire plus (bouton visible au hover) --}}
             <a href="{{ route('posts.show', $post->slug) }}"
                class="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700">
                 Lire plus →
             </a>
         </div>
+
     </div>
 </div>
