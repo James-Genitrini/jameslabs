@@ -18,7 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Facades\Filament;
-use Redirect;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -62,9 +62,8 @@ class AdminPanelProvider extends PanelProvider
     {
         Filament::serving(function () {
             if (auth()->check() && !auth()->user()->is_admin) {
-                return Redirect::to('/')->send();
+                redirect('/')->send(); // Redirection ici après auth réussie
             }
         });
     }
-
 }
