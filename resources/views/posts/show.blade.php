@@ -13,7 +13,7 @@
 
 
         <!-- Section Article -->
-        <div id="mainContent" class="flex-1 w-full md:w-3/4 h-80vh overflow-auto custom-scrollbar mt-14 transition-all duration-300">
+        <div id="mainContent" class="flex-1 w-full md:w-3/4 h-80vh overflow-auto custom-scrollbar mt-14 transition-[width] duration-300 ease-in-out">
             <button onclick="toggleSidebar()" class="sticky top-4 float-right bg-purple-600 text-white px-3 py-1 rounded hover:bg-purple-700 z-20">
                 ⇆
             </button>
@@ -73,12 +73,31 @@
                 sidebar.classList.remove('hidden-by-toggle');
                 mainContent.classList.remove('w-full');
                 mainContent.classList.add('md:w-3/4');
+                localStorage.setItem('sidebarOpen', 'true');
+            } else {
+                sidebar.classList.add('hidden-by-toggle');
+                mainContent.classList.remove('md:w-3/4');
+                mainContent.classList.add('w-full');
+                localStorage.setItem('sidebarOpen', 'false');
+            }
+        }
+
+        // Rétablir l'état de la sidebar au chargement
+        window.addEventListener('DOMContentLoaded', () => {
+            const sidebarOpen = localStorage.getItem('sidebarOpen') === 'true';
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+
+            if (sidebarOpen) {
+                sidebar.classList.remove('hidden-by-toggle');
+                mainContent.classList.remove('w-full');
+                mainContent.classList.add('md:w-3/4');
             } else {
                 sidebar.classList.add('hidden-by-toggle');
                 mainContent.classList.remove('md:w-3/4');
                 mainContent.classList.add('w-full');
             }
-        }
+        });
     </script>
 
 
