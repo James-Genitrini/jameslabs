@@ -59,7 +59,7 @@
                             >
                         </a>
                     @else
-                        <a href="/auth/login" class="text-lg text-[#9471a6] dark:text-[#9471a6] hover:text-[#7b5e91] dark:hover:text-blue-300 transition">Se connecter</a>
+                        <a href="/login" class="text-lg text-[#9471a6] dark:text-[#9471a6] hover:text-[#7b5e91] dark:hover:text-blue-300 transition">Se connecter</a>
                     @endauth
                 </div>
             </div>
