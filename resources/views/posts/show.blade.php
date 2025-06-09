@@ -26,7 +26,7 @@
                 <div class="ml-6 flex flex-col justify-start w-2/3">
                     <h1 class="text-4xl font-bold text-gray-300 mb-2">{{ $post->title }}</h1>
                     @if($post->synopsis) 
-                        <p class="text-md italic text-gray-300">{{ $post->synopsis }}</p>
+                        {!! Str::markdown($post->synopsis) !!}
                     @else
                         <p class="text-md text-gray-300">Pas de synopsis disponible.</p>
                     @endif
