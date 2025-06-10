@@ -25,8 +25,10 @@
                 @endif
                 <div class="ml-6 flex flex-col justify-start w-2/3">
                     <h1 class="text-4xl font-bold text-gray-300 mb-2">{{ $post->title }}</h1>
-                    @if($post->synopsis) 
-                        {!! Str::markdown($post->synopsis) !!}
+                    @if($post->synopsis)
+                        <div class="prose max-w-none text-justify">
+                            {!! Str::markdown($post->synopsis) !!}
+                        </div>
                     @else
                         <p class="text-md text-gray-300">Pas de synopsis disponible.</p>
                     @endif
@@ -35,7 +37,7 @@
 
             <section class="mb-8 flex-1">
                 <h2 class="text-2xl font-semibold text-gray-300 mb-4">Contenu de l'article</h2>
-                <div class="prose max-w-none">
+                <div class="prose max-w-none text-justify">
                     {!! Str::markdown($post->content) !!}
                 </div>
             </section>
