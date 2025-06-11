@@ -16,8 +16,13 @@ class HomeController extends Controller
 
         $latestPosts = $allPosts->take(4);
 
-        $mostLikedPosts = Post::withCount('likes')->withCount('comments')->orderByDesc('likes_count')->take(4)->get();
+        $mostLikedPosts = Post::where('published', true) // Ajout de cette ligne pour filtrer les posts publiés
+            ->withCount('likes')
+            ->withCount('comments')
+            ->orderByDesc('likes_count')
+            ->take(4)
+            ->get();
 
-        return view('home.index', compact( 'latestPosts', 'mostLikedPosts'));
+        return view('home.index', compact('latestPosts', 'mostLikedPosts'));
     }
 }
